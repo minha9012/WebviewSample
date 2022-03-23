@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<!--    <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+    <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+<!--    <script src="//code.jquery.com/jquery.min.js"></script>-->
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../js/skylark.js"></script>
+
+    <title>Hello World</title>
+</head>
+<body>
+<div data-role="page" id="mainPage">
+    <div data-role="header">
+        <h1>mainPage Header</h1>
+    </div>
+
+    <div data-role="content">
+        <h1>Login</h1>
+        <p>
+            <a href="login.html">Login으로 이동</a>
+        </p>
+    </div>
+
+    <div data-role="content">
+        <h1>Function Test</h1>
+        <p>
+            <a href="function_test.html">Android Test로 이동</a>
+        </p>
+    </div>
+
+    <div data-role="content">
+        <h1>BiddingBidding</h1>
+        <p>
+            <a href="00loan-main.html" data-ajax="false">BiddingBidding으로 이동</a>
+<!--            <button id="btnMoveBid" text="biddingbidding으로 이동"/>-->
+
+        </p>
+    </div>
+    <div data-role="content">
+        <h1>서버 선택</h1>
+
+        <div class="frm_login_wrap">
+            <input class="frm_input001" id="input_ip" type="text" placeholder="IP" value="192.168.0.148">
+            <input class="frm_input001" id="input_port" type="text" placeholder="Port" value="8080"/>
+            <input class="frm_input001" id="input_context" type="text" placeholder="context" value="skylark-bdd"/>
+        </div>
+
+        <p>
+            <a id="linkServer" href="javascript:void(0);" onclick="movePage(); return false;" data-ajax="false">지정한 주소로 이동</a>
+        </p>
+    </div>
+
+    <div data-role="footer">
+        <h1>Footer</h1>
+    </div>
+
+    <script type="text/javascript">
+
+    function movePage(){
+        var URL = "http://" + $("#input_ip").val() + ":" + $("#input_port").val()
+          + "/" + $("#input_context").val();
+
+        location.href = URL;
+
+        showToast(URL);
+        Android.mLog(URL);
+    }
+
+    $(document).ready(function(){
+
+
+    });
+    </script>
+</div>
+
+
+
+</body>
+</html>

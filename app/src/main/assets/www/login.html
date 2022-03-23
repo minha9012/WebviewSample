@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Login</title>
+
+
+    <link rel="stylesheet" href="<c:out value='${CSS_DIR}'/>/frmLgn.css" type="text/css">
+    <link rel="stylesheet" href="<c:out value='${CSS_DIR}'/>/theme/theme-01.css" type="text/css">
+    <link rel="stylesheet" href="<c:out value='${CSS_DIR}'/>/theme/theme-02.css" type="text/css">
+    <link rel="stylesheet" href="<c:out value='${CSS_DIR}'/>/theme/theme-03.css" type="text/css">
+    <link rel="stylesheet" href="<c:out value='${CSS_DIR}'/>/theme/theme-04.css" type="text/css">
+    <link rel="stylesheet" href="<c:out value='${CSS_DIR}'/>/theme/theme-05.css" type="text/css">
+
+    <!-- jquery -->
+    <script type="text/javascript"
+            src="${pageContext.request.contextPath}/webjars/jquery/dist/3.5.1/jquery.min.js"></script>
+
+    <!-- jquery-confirm -->
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/webjars/github-com-craftpip-jquery-confirm/3.0.1/css/jquery-confirm.css"
+          type="text/css"/>
+    <script type="text/javascript"
+            src="${pageContext.request.contextPath}/webjars/github-com-craftpip-jquery-confirm/3.0.1/js/jquery-confirm.js"></script>
+
+    <!-- jquery mobile -->
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"/>
+<!--    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>-->
+    <script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+    <script src="../js/skylark.js"></script>
+
+    <script type="text/javascript">
+	var themeType = "<c:out value='${themeType}'/>";
+	if (themeType == "bootstrap") {
+		$('head').append('<link rel="stylesheet" type="text/css" href="<c:out value='${CSS_DIR}'/>/frmCmnBootstrap.css">');
+		$('head').append('<link rel="stylesheet" type="text/css" href="<c:out value='${CSS_DIR}'/>/frmCmn.css">');
+		$('head').append('<link rel="stylesheet" type="text/css" href="<c:out value='${CSS_DIR}'/>/theme/theme-01.css">');
+
+	} else if (themeType == "office") {
+		$('head').append('<link rel="stylesheet" type="text/css" href="<c:out value='${CSS_DIR}'/>/frmCmnOffice.css"');
+		$('head').append('<link rel="stylesheet" type="text/css" href="<c:out value='${CSS_DIR}'/>/frmCmn.css">');
+		$('head').append('<link rel="stylesheet" type="text/css" href="<c:out value='${CSS_DIR}'/>/theme/theme-02.css">');
+
+	} else if (themeType == "web") {
+		$('head').append('<link rel="stylesheet" type="text/css" href="<c:out value='${CSS_DIR}'/>/frmCmnWeb.css">');
+		$('head').append('<link rel="stylesheet" type="text/css" href="<c:out value='${CSS_DIR}'/>/frmCmn.css">');
+		$('head').append('<link rel="stylesheet" type="text/css" href="<c:out value='${CSS_DIR}'/>/theme/theme-03.css">');
+
+	} else if (themeType == "sunny") {
+		$('head').append('<link rel="stylesheet" type="text/css" href="<c:out value='${CSS_DIR}'/>/frmCmnSunny.css">');
+		$('head').append('<link rel="stylesheet" type="text/css" href="<c:out value='${CSS_DIR}'/>/frmCmn.css">');
+		$('head').append('<link rel="stylesheet" type="text/css" href="<c:out value='${CSS_DIR}'/>/theme/theme-04.css">');
+
+	} else if (themeType == "energyblue") {
+		$('head').append('<link rel="stylesheet" type="text/css" href="<c:out value='${CSS_DIR}'/>/frmCmnEnergyBlue.css">');
+		$('head').append('<link rel="stylesheet" type="text/css" href="<c:out value='${CSS_DIR}'/>/frmCmn.css">');
+		$('head').append('<link rel="stylesheet" type="text/css" href="<c:out value='${CSS_DIR}'/>/theme/theme-05.css">');
+
+	} else if (themeType == "theme") {
+ 		$('head').append('<link rel="stylesheet" type="text/css" href="${CSS_DIR}/theme/bootstrap.css">');
+ 		$('head').append('<link rel="stylesheet" type="text/css" href="${CSS_DIR}/theme/themify-icons/css/themify-icons.css">');
+ 		$('head').append('<link rel="stylesheet" type="text/css" href="${CSS_DIR}/theme/animate.css/animate.min.css">');
+ 		$('head').append('<link rel="stylesheet" type="text/css" href="${CSS_DIR}/theme/toastr/toastr.min.css">');
+ 		$('head').append('<link rel="stylesheet" type="text/css" href="${CSS_DIR}/theme/main.css">');
+ 		$('head').append('<link rel="stylesheet" type="text/css" href="<c:out value='${CSS_DIR}'/>/frmCmn.css">');
+		$('head').append('<link rel="stylesheet" type="text/css" href="<c:out value='${CSS_DIR}'/>/theme/theme-01.css">');
+ 	}
+
+    </script>
+
+</head>
+<body class="frmMain_body">
+<div data-role="page" class="login_container" id="loginPage">
+    <div class="login_logo_wrap">
+        <p class="frm_login_logo">
+            <!--<img src="/skylark-frm/resources/image/frm/header/skylark_6.png" />-->
+        </p>
+    </div>
+    <div class="login_box">
+        <div class="text-center">
+            <span class="auth-head-icon"></span>
+        </div>
+        <div class="loginContents" style="">
+            <h2>LOGIN</h2>
+            <form id="lgnForm" method="post" action="<c:url value='/FRM/FCD/LGN/FRMFCDLGN001.do'/>">
+                <input type="hidden" type="hidden" name="guestUseFlag" value='${guestUseFlag}'/>
+                <input type="hidden" id="sys_login_type" name="sys_login_type"/>
+                <input type="hidden" id="sys_lang" name="sysLang"/>
+                <input type="hidden" id="sys_theme" name="sysTheme"/>
+                <!-- <input type="hidden" id="sys_theme_desc" name="sysThemeDesc" />
+                <input type="hidden" id="sys_lang_desc"  name="sysLangDesc" />
+                <input type="hidden" id="sys_organization_code"  name="sysOrganizationCode" value='${ORGANIZATION_CODE}'/>-->
+
+                <!-- 20200320 hdy add -->
+                <div class="frm_login_wrap" style="display: none;">
+                    <select class="frm_input002" id="organizationCode" name="organizationCode">
+                        <option value="" selected="selected">Branch Code</option>
+                    </select>
+                </div>
+                <div class="frm_login_wrap">
+                    <input type="hidden" class="frm_input001" type="text" id="sys_organization_code"
+                           name="sysOrganizationCode" value='${ORGANIZATION_CODE}'/>
+                </div>
+                <!-- 20200320 hdy add end -->
+
+
+                <div class="frm_login_wrap">
+                    <input class="frm_input001" id="sys_usrid" name="sysUsrid" type="text"
+                           placeholder="ID or Email">
+                </div>
+                <div class="frm_login_wrap">
+                    <input class="frm_input001" id="sys_passwd" name="sysPasswd" type="password"
+                           placeholder="Password"/>
+                </div>
+                <div class="frm_login_wrap">
+                    <select class="frm_input002 " id="langType">
+                        <option value="">Country</option>
+                        <option value="EN">English</option>
+                        <option value="KO">Korea</option>
+                    </select>
+                </div>
+                <div class="frm_login_wrap margin_t30">
+                    <button id="btnLogin" class="btn btn-login">Login</button>
+                </div>
+                <div class="frm_login_wrap margin_t20">
+                    <input type="checkbox" id="rememberme"> <label
+                        class="text">Keep me logged in on this computer</label>
+                </div>
+                <div class="frm_login_wrap margin_t30" id="divSignUp" style="display:none;">
+                    <button id="btnSignUp" type="button" class="btn loginButton "
+                            onclick="fn_signUp()">Sign Up
+                    </button>
+                </div>
+
+            </form>
+        </div>
+        <input type="hidden" id="message" name="message" value="${sysErrorMessage}"/>
+        <input type="hidden" id="messageId" name="messageId" value="${sysErrorMessageId}"/>
+    </div>
+</div>
+</body>
+
+<script type="text/javascript">
+
+	jQuery(document).ready(function() {
+			var setCookie = function(cookieName, value, exdays) {
+				var exdate = new Date();
+				exdate.setDate(exdate.getDate() + exdays);
+				var cookieValue = escape(value)
+						+ ((exdays == null) ? "" : "; expires=" + exdate.toGMTString());
+				document.cookie = cookieName + "=" + cookieValue;
+			};
+
+			var deleteCookie = function(cookieName) {
+				var expireDate = new Date();
+				expireDate.setDate(expireDate.getDate() - 1);
+				document.cookie = cookieName + "= " + "; expires="
+						+ expireDate.toGMTString();
+			};
+
+			var getCookie = function(cookieName) {
+				cookieName = cookieName + '=';
+				var cookieData = document.cookie;
+				var start = cookieData.indexOf(cookieName);
+				var cookieValue = '';
+				if (start != -1) {
+					start += cookieName.length;
+					var end = cookieData.indexOf(';', start);
+					if (end == -1)
+						end = cookieData.length;
+					cookieValue = cookieData.substring(start, end);
+				}
+				return unescape(cookieValue);
+			};
+
+			$("#btnLogin").click(function() {
+		        if ($("#sys_usrid").val().trim() == "") {
+		        	var userIdMsg = "Input User Id";
+					$.alert($.extend({}, ALERT_RED_SET, {
+						title: 'Validation Error',
+						content: userIdMsg,
+						buttons: {
+							ok: {
+									btnClass: 'btn-red',
+									action: function() {
+								}
+							}
+						}
+					}));
+		            return false;
+		        }
+				if ($("#sys_passwd").val().trim() == "") {
+					var passwodMsg = "Input Password";
+					$.alert($.extend({}, ALERT_RED_SET, {
+						title: 'Validation Error',
+						content: passwodMsg,
+						buttons: {
+							ok: {
+								btnClass: 'btn-red',
+								action: function() {
+								}
+							}
+						}
+					}));
+					return false;
+				}
+
+				// sys language
+				var langTypeCode = $("#langType option:selected").val();
+				var langTypeDesc = $("#langType option:selected").text();
+				if (langTypeCode == "") {
+					var langTypeMsg = "Select Country";
+					$.alert($.extend({}, ALERT_RED_SET, {
+						title: 'Validation Error',
+						content: langTypeMsg,
+						buttons: {
+							ok: {
+								btnClass: 'btn-red',
+								action: function() {
+								}
+							}
+						}
+					}));
+					return false;
+				}
+				$("#sys_lang").val(langTypeCode);
+				$("#sys_lang_desc").val(langTypeDesc);
+
+				// sys theme
+				$("#sys_theme").val("<c:out value='${themeType}'/>");
+				$("#sys_theme_desc").val("<c:out value='${themeType}'/>");
+			});
+
+			var userInputId = getCookie("userInputId");
+			$("input[name='sysUsrid']").val(userInputId);
+			if ($("input[name='sysUsrid']").val() != "") {
+				$('input:checkbox[id="rememberme"]').attr("checked", true);
+			}
+
+			$("#rememberme").change(function(){
+		        if($("#rememberme").is(":checked")){
+		        	var userInputId = $("input[name='sysUsrid']").val();
+					setCookie("userInputId", userInputId, 7);
+		        }else{
+		        	deleteCookie("userInputId");
+		        }
+		    });
+
+			$("input[name='sysUsrid']").keyup(function() {
+				var checked = $("input:checkbox[id='rememberme']").is(":checked")
+				if (checked) {
+					var userInputId = $("input[name='sysUsrid']").val();
+					setCookie("userInputId", userInputId, 7);
+				}
+			});
+
+			$("#organizationCode").on('change', function(){
+				var organizationCode = $("#organizationCode").val();
+				$("#sys_organization_code").val(organizationCode);
+			})
+
+			//fn_getOrganizationCode();
+
+			var guestUseFlag = $("input[name='guestUseFlag']").val();
+			if( guestUseFlag == "Y") {
+				$("#divSignUp").show();
+			}
+		});
+
+		jQuery(window).on ('load', function() {
+			var msg = $("#message").val();
+			if (msg != "") {
+				$.alert($.extend({}, ALERT_RED_SET, {
+					title  : 'Error',
+					content: msg,
+					buttons: {
+						ok : {
+							  btnClass: 'btn-red',
+							  action: function() {
+							}
+						}
+					}
+				}));
+				$("#message").val("");
+			}
+		});
+		var ALERT_RED_SET = {
+				type : 'red' ,
+				useBootstrap : false ,
+				boxWidth : '20%' ,
+			};
+
+		function fn_signUp() {
+			var leftPosition=(screen.width-600)/2;
+			var topPosition=(screen.height-400)/2;
+			var win = window.open("<c:url value='/FRM/FCD/SGU/FRMFCDSGU000.do'/>", 'signUpWin', 'width=600, height=400, menubar=no, status=no, toolbar=no,top='+topPosition+",left="+leftPosition);
+		}
+
+</script>
+
+</html>
